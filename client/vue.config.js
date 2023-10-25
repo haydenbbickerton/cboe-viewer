@@ -10,7 +10,7 @@ module.exports = {
       //   libraryExport: "default"
     }
   },
-
+  publicPath: '',
   css: {
     sourceMap: true
   },

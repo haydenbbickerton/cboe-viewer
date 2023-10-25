@@ -1,0 +1,66 @@
+---
+- Name: Auction Update
+  Section: "4.8"
+  Description: >-
+      Auction Update messages are used to disseminate Cboe price and size
+      information during auctions for Cboe listed securities. The Auction Update
+      messages are sent every five seconds during a Halt/IPO Quote-Only period.
+      Opening Auction Update messages are disseminated every five seconds
+      between 9:28 and 9:30 a.m. Closing Auction Update messages are distributed
+      every five seconds between 3:55 and 4:00 p.m.
+
+      Cboe Auction Update messages support the Cboe Opening, Closing, Halt and
+      IPO Auctions on the BZX Exchange. Refer to the Cboe US Equities Auction
+      Process specification for more information on Cboe Auctions.
+  Fields:
+      - Field Name: Timestamp
+        Offset: 0
+        Length: 8
+        Data Type: Timestamp
+        Description: Timestamp
+      - Field Name: Message Type
+        Offset: 8
+        Length: 1
+        Data Type: I
+        Description: Auction Update message
+      - Field Name: Stock Symbol
+        Offset: 9
+        Length: 8
+        Data Type: Printable ASCII
+        Description: Stock symbol right padded with spaces.
+      - Field Name: Auction Type
+        Offset: 17
+        Length: 1
+        Data Type: Alpha
+        Description: |-
+            O = Opening Auction
+            C = Closing Auction
+            H = Halt Auction
+            I = IPO Auction
+      - Field Name: Reference Price
+        Offset: 18
+        Length: 10
+        Data Type: Price
+        Description: BBO Collared auction price (see Auction Process Spec).
+      - Field Name: Buy Shares
+        Offset: 28
+        Length: 10
+        Data Type: Numeric
+        Description: Number of shares on the buy side at the Reference Price.
+      - Field Name: Sell Shares
+        Offset: 38
+        Length: 10
+        Data Type: Numeric
+        Description: Number of shares on the sell side at the Reference Price.
+      - Field Name: Indicative Price
+        Offset: 48
+        Length: 10
+        Data Type: Price
+        Description:  Price at which the auction book and the continuous book would match.
+      - Field Name: Auction Only Price
+        Offset: 58
+        Length: 10
+        Data Type: Price
+        Description: >-
+            Price at which the auction book would match using only Eligible
+            Auction Orders (see Auction Process Spec).

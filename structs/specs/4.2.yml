@@ -1,0 +1,24 @@
+---
+- Name: Symbol Clear
+  Section: "4.2"
+  Description: >-
+      The Symbol Clear message instructs feed recipients to clear all orders for
+      the Cboe book in the specified symbol. This message will be sent at
+      startup each day. It would also be distributed in certain recovery events
+      such as a data center fail-over.
+  Fields:
+      - Field Name: Timestamp
+        Offset: 0
+        Length: 8
+        Data Type: Timestamp
+        Description: TimeStamp
+      - Field Name: Message Type
+        Offset: 8
+        Length: 1
+        Data Type: s
+        Description: Symbol Clear Message
+      - Field Name: Stock Symbol
+        Offset: 9
+        Length: 8
+        Data Type: Printable ASCII
+        Description: Stock symbol right padded with spaces.

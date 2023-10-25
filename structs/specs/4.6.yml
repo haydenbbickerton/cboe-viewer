@@ -1,0 +1,27 @@
+---
+- Name: Trade Break
+  Section: "4.6"
+  Description: >-
+      The Trade Break message is sent whenever an execution on Cboe is broken.
+      Trade breaks are rare and only affect applications that rely upon Cboe
+      execution based data. Applications that simply build a Cboe book can
+      ignore Trade Break messages.
+  Fields:
+      - Field Name: Timestamp
+        Offset: 0
+        Length: 8
+        Data Type: Timestamp
+        Description: Timestamp
+      - Field Name: Message Type
+        Offset: 8
+        Length: 1
+        Data Type: B
+        Description: Trade Break message
+      - Field Name: Execution ID
+        Offset: 9
+        Length: 12
+        Data Type: Base 36 Numeric
+        Description: >-
+            Cboe execution identifier of the execution that was broken.
+            Execution ID refers to previously sent Order Execution or Trade
+            message.

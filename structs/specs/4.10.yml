@@ -1,0 +1,36 @@
+---
+- Name: Retail Price Improvement
+  Section: "4.10"
+  Description: >-
+      The Retail Price Improvement message is only available on the BYX
+      Exchange. This message is a Retail Liquidity Indicator (RLI) that includes
+      symbol and side, but not price and size. An RLI will be disseminated when
+      there is a Retail Price Improving (RPI) order present for a symbol on the
+      BYX Exchange order book OR to indicate a RPI order is no longer available.
+      RPI orders offer price improvement in increments of $.001 to Retail Member
+      Organizations.
+  Fields:
+      - Field Name: Timestamp
+        Offset: 0
+        Length: 8
+        Data Type: Timestamp
+        Description: TimeStamp
+      - Field Name: Message Type
+        Offset: 8
+        Length: 1
+        Data Type: R
+        Description: Retail Price Improvement message
+      - Field Name: Stock Symbol
+        Offset: 9
+        Length: 8
+        Data Type: Printable ASCII
+        Description: Symbol
+      - Field Name: Retail Price Improvement
+        Offset: 17
+        Length: 1
+        Data Type: Alpha
+        Description: |-
+            B = Buy Side RPI
+            S = Sell Side RPI
+            A = Buy & Sell RPI
+            N = No RPI

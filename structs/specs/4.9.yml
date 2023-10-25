@@ -1,0 +1,52 @@
+---
+- Name: Auction Summary
+  Section: "4.9"
+  Description: >-
+      Auction Summary messages are used to disseminate the results of an auction
+      of a Cboe listed security. An Opening Auction Summary message for each
+      Cboe listed security is sent at the conclusion of its opening auction at
+      9:30 a.m. and represents the Cboe official opening price. A Closing
+      Auction Summary message for each Cboe listed security is sent at the
+      conclusion of its closing auction at 4:00 p.m. and represents the Cboe
+      official closing price. An IPO Auction Summary message for each Cboe
+      listed security is sent at the conclusion of the IPO Auction and
+      represents the official Cboe IPO opening price.
+
+      Cboe Auction Summary messages support the Cboe Opening, Closing, Halt and
+      IPO Auctions on the BZX Exchange. Refer to the Cboe US Equities Auction
+      Process specification for more information on Cboe Auctions.
+  Fields:
+      - Field Name: Timestamp
+        Offset: 0
+        Length: 8
+        Data Type: Timestamp
+        Description: Timestamp
+      - Field Name: Message Type
+        Offset: 8
+        Length: 1
+        Data Type: J
+        Description: Auction Summary message
+      - Field Name: Stock Symbol
+        Offset: 9
+        Length: 8
+        Data Type: Printable ASCII
+        Description: Stock symbol right padded with spaces.
+      - Field Name: Auction Type
+        Offset: 17
+        Length: 1
+        Data Type: Alpha
+        Description: |-
+            O = Opening Auction
+            C = Closing Auction
+            H = Halt Auction
+            I = IPO Auction
+      - Field Name: Price
+        Offset: 18
+        Length: 10
+        Data Type: Price
+        Description: Auction price
+      - Field Name: Shares
+        Offset: 28
+        Length: 10
+        Data Type: Numeric
+        Description: Cumulative number of shares  executed during the auction

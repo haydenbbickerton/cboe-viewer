@@ -1,0 +1,56 @@
+---
+- Name: Trading Status
+  Section: "4.7"
+  Description: >-
+      The Trading Status message is used to indicate the current trading status
+      of a security. A Trading Status message will be sent whenever a security’s
+      trading status changes. In addition, Cboe will send a Trading Status
+      message for all securities that are “Halted” or have a price test in
+      effect before the start of trading hours.
+
+      Trading Status of `S` will be implied at system startup. `T` will be sent
+      as securities are available for trading. `A` will be distributed when
+      orders can be accepted for queuing in preparation for the market open.
+  Fields:
+      - Field Name: Timestamp
+        Offset: 0
+        Length: 8
+        Data Type: Timestamp
+        Description: Timestamp
+      - Field Name: Message Type
+        Offset: 8
+        Length: 1
+        Data Type: H
+        Description: Trading Status message
+      - Field Name: Stock Symbol
+        Offset: 9
+        Length: 8
+        Data Type: Printable ASCII
+        Description: Stock symbol right padded with spaces.
+      - Field Name: Halt Status
+        Offset: 17
+        Length: 1
+        Data Type: Alpha
+        Description: |-
+            A = Accepting Orders for Queuing
+            H = Halted
+            Q = Quote-Only (Cboe Listings)
+            S = Exchange Specific Suspension
+            T = Trading
+      - Field Name: Reg SHO Action
+        Offset: 18
+        Length: 1
+        Data Type: Numeric
+        Description: |-
+            0 = No price test in effect
+            1 = Reg SHO price test restriction in effect
+      - Field Name: Reserved1
+        Offset: 19
+        Length: 1
+        Data Type: Alpha
+        Description: Reserved
+      - Field Name: Reserved2
+        Offset: 20
+        Length: 1
+        Data Type: Alpha
+        Description: Reserved

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="cboe-pitch-viewer">CBOE PITCH Viewer</h1>
+<blockquote>
+<p>A tool for viewing/debugging PITCH messages</p>
+</blockquote>
+<p>DEMO: <a href="http://cboe.haydenbickerton.com/">cboe.haydenbickerton.com</a></p>
+<p>Here is a screenshot of the web interface:</p>
+<p><img src="https://drive.google.com/uc?export=view&id=15KgEKh51IWeQcE7jn7xWy1QARKsuy8bi" alt="viewer"></p>
+<h2 id="run-the-compiled-viewer">Run the compiled viewer</h2>
+<pre class=" language-sh"><code class="prism  language-sh">$ cd /client/dist
+$ python3 -m http.server 8080
+...
+</code></pre>
+<p>Then open your browser to <a href="http://localhost:8080/">http://localhost:8080/ </a> to see the viewer.</p>
+<h2 id="installation--development">Installation &amp; Development</h2>
+<p>OS X &amp; Linux:</p>
+<pre class=" language-sh"><code class="prism  language-sh">$ cd /client
+$ yarn install
+yarn install v1.7.0
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+...
+$ npm run serve
+...
+  App running at:
+  - Local:   http://localhost:8080/
+  - Network: http://10.0.0.200:8080/
+</code></pre>
+<h1 id="notes">Notes</h1>
+<p>The code is in one of two steps:</p>
+<ol>
+<li>Converting the PITCH Message Specifications into usage python/javascript parsers/models
+<ul>
+<li><code>/structs/specs</code> - YAML’s extracted from PDF using <a href="%5Bhttps://tabula.technology/%5D(https://tabula.technology/)">tabula</a></li>
+<li><code>/notebooks/Building Structs.ipynb</code> - Notebook to build YAMLs into py/js models</li>
+</ul>
+</li>
+<li>Web interface/app/viewer to view uploaded message data
+<ul>
+<li><code>/client/</code> - Vue.js app (pictured above)</li>
+<li><code>/structs/compiled/Cboe.js</code> - Generated in  step 1 , imported by web app</li>
+</ul>
+</li>
+</ol>
+<p>Initially I went the route of making the python models and types for a backend parsing service, as I’m primarily a python developer. But copy-pasting each value into hardcoded classes when there’s clearly an existing spec <em>somewhere</em> isn’t what I’d normally do. So I did the YAMLs, and referenced those as the specs in the vue app. More about this in <code>Building Structs.ipynb</code>. I left code from initial run in <code>/cboe-sdk/</code> and <code>/notebooks/Modeling.ipynb</code>.</p>
+<h3 id="other">Other</h3>
+<p>This feels very similar to <a href="%5Bhttps://www.acord.org/standards-architecture/acord-data-standards/Property_Casualty_Data_Standards#AL3%5D(https://www.acord.org/standards-architecture/acord-data-standards/Property_Casualty_Data_Standards#AL3)">ACORD AL3</a>, which is a popular <a href="%5Bhttps://www.ibm.com/support/knowledgecenter/en/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ad09530_.htm%5D(https://www.ibm.com/support/knowledgecenter/en/SSMKHH_10.0.0/com.ibm.etools.mft.doc/ad09530_.htm)">fixed length messaging standard</a> used by insurance software for the transmission of policies and claims. I created the AL3 implementation during my time at <a href="%5Bhttps://www.britecore.com/%5D(https://www.britecore.com/)">BriteCore</a> .</p>
+<p>The idea for the viewer comes from working with AL3, as there are thousands of different data/message types and no straightforward tool for displaying a feed of messages and their fields.</p>
+</div>
+</body>
+
+</html>

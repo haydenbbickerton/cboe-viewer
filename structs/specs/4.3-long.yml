@@ -1,0 +1,70 @@
+---
+- Name: Add Order (long)
+  Section: "4.3"
+  Description: >-
+      An Add Order message represents a newly accepted visible order on the Cboe
+      book. It includes a day-specific Order ID assigned by Cboe to the order.
+      The Display field is used to reflect whether or not the order can be
+      considered a protected quote and thus reportable to the SIP.
+
+      The long version of the Add Order message has been made available to
+      accommodate larger symbol sizes possible through the ISRA plan.
+
+      NOTE: If an order’s Price or Display values change within the Cboe
+      matching engine, a Cancel Order Message will be immediately followed by a
+      new Add Order message with the same Order ID as the original order. An
+      order that changes its Display value from “N” to “Y” will not lose its
+      priority.
+  Fields:
+      - Field Name: Timestamp
+        Offset: 0
+        Length: 8
+        Data Type: Timestamp
+        Description: Timestamp
+      - Field Name: Message Type
+        Offset: 8
+        Length: 1
+        Data Type: d
+        Description: Add Order message (long)
+      - Field Name: Order ID
+        Offset: 9
+        Length: 12
+        Data Type: Base 36 Numeric
+        Description: Day-specific identifier assigned to this order
+      - Field Name: Side Indicator
+        Offset: 21
+        Length: 1
+        Data Type: Alpha
+        Description: |-
+            B = Buy Order
+            S = Sell Order
+      - Field Name: Shares
+        Offset: 22
+        Length: 6
+        Data Type: Numeric
+        Description: >-
+            Number of shares being added to the book (may be less than the
+            number of shares entered).
+      - Field Name: Stock Symbol
+        Offset: 28
+        Length: 8
+        Data Type: Printable ASCII
+        Description: Stock symbol right padded with spaces.
+      - Field Name: Price
+        Offset: 36
+        Length: 10
+        Data Type: Price
+        Description: The limit order price
+      - Field Name: Display
+        Offset: 46
+        Length: 1
+        Data Type: Alpha
+        Description: Y = The order is aggregated in the Cboe SIP quote.
+      - Field Name: ParticipantID
+        Offset: 47
+        Length: 4
+        Data Type: Alpha
+        Description: >-
+            Optionally specified. If specified, MPID or RTAL for  retail
+            specified orders (equities) of firm attributed to this quote. Space
+            filled otherwise.

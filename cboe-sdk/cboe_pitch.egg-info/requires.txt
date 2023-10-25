@@ -1,0 +1,4 @@
+pydantic
+boltons
+xotl.tools
+parse

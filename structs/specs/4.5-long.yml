@@ -1,0 +1,68 @@
+---
+- Name: Trade (long)
+  Section: "4.5"
+  Description: >-
+      The Trade message provides information about executions of non-displayed
+      orders or shares on the Cboe book and routed orders. Trade messages are
+      necessary to calculate Cboe execution based data. Trade messages do not
+      alter the book and can be ignored if you are just building a book.
+
+      No Add Order message is sent for non-displayed and routed orders, and
+      thus, no modify order messages may be sent when non-displayed orders are
+      executed. Instead, a Trade message is sent whenever a hidden or routed
+      order is executed in whole or in part. A Trade message is also sent when
+      there is an execution against any non-displayed portion of a reserve
+      order. As with visible orders, hidden orders may be executed in parts. A
+      complete view of all Cboe executions can be built by combining all Order
+      Executed messages and Trade messages.
+
+      The OrderID of a non-displayed order is obfuscated by default in the Trade
+      message, but may be optionally disseminated for a member’s own orders upon
+      request. As such, partial executions against the same hidden order will by
+      default have different OrderIDs.
+
+      NOTE: The long version of the Trade message has been made available to
+      accommodate larger symbol sizes possible through the ISRA plan.
+  Fields:
+      - Field Name: Timestamp
+        Offset: 0
+        Length: 8
+        Data Type: Timestamp
+        Description: Timestamp
+      - Field Name: Message Type
+        Offset: 8
+        Length: 1
+        Data Type: r
+        Description: Trade message (long)
+      - Field Name: Order ID
+        Offset: 9
+        Length: 12
+        Data Type: Base 36 Numeric
+        Description: Obfuscated Order ID or Order ID of the executed order.
+      - Field Name: Side Indicator
+        Offset: 21
+        Length: 1
+        Data Type: Alpha
+        Description: Always B = Buy Order regardless of side of resting order
+      - Field Name: Shares
+        Offset: 22
+        Length: 6
+        Data Type: Numeric
+        Description: Incremental Number of shares executed
+      - Field Name: Stock Symbol
+        Offset: 28
+        Length: 8
+        Data Type: Printable ASCII
+        Description: Stock symbol right padded with spaces.
+      - Field Name: Price
+        Offset: 36
+        Length: 10
+        Data Type: Price
+        Description: The execution price of the order
+      - Field Name: Execution ID
+        Offset: 46
+        Length: 12
+        Data Type: Base 36 Numeric
+        Description: >-
+            Cboe generated day-unique execution identifier of this trade.
+            Execution ID is also referenced in the Trade Break message.

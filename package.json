@@ -1,0 +1,11 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "kaitai-struct": "^0.8.0-SNAPSHOT.11",
+    "kaitai-struct-compiler": "^0.8.0-SNAPSHOT.20190424.105032",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,42 @@
+---
+- Name: Order Executed
+  Section: "4.4.1"
+  Description: >-
+      Order Executed messages are sent when a visible order on the Cboe book is
+      executed in whole or in part. The execution price equals the limit order
+      price found in the original Add Order message.
+
+      NOTE:  Order Modification messages (4.4.x) refer to an Order ID previously
+      sent with an Add Order message. Multiple Order Modification messages may
+      modify a single order and the effects are cumulative. Order Modification
+      messages always reduce the remaining shares in the referenced open order
+      by the number of shares indicated. When the remaining shares for an order
+      reach zero, the order is dead and should be removed from the book.
+  Fields:
+      - Field Name: Timestamp
+        Offset: 0
+        Length: 8
+        Data Type: Timestamp
+        Description: Timestamp
+      - Field Name: Message Type
+        Offset: 8
+        Length: 1
+        Data Type: E
+        Description: Order Executed message
+      - Field Name: Order ID
+        Offset: 9
+        Length: 12
+        Data Type: Base 36 Numeric
+        Description: Order ID of a previously sent Add Order Message that was executed.
+      - Field Name: Executed Shares
+        Offset: 21
+        Length: 6
+        Data Type: Numeric
+        Description: Number of shares executed
+      - Field Name: Execution ID
+        Offset: 27
+        Length: 12
+        Data Type: Base 36 Numeric
+        Description: >-
+            Cboe generated day-unique execution identifier of this execution.
+            Execution ID is also referenced in the Trade Break Message.

@@ -37,6 +37,7 @@ jobs:
           node-version: 8.x
       - name: npm install, build and test
         run: |
+          cd client
           npx yarn install
           npx yarn run build
       - name: Setup Pages
